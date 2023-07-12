@@ -1,34 +1,30 @@
 import { useEffect, useState } from "react";
-import useSWR from "swr";
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { convertUrltoHost } from "../utils/tools";
+import { getNew } from "../api/news";
 
 export function ListItem(prop) {
   const [topstorie, setTopstorie] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data, error, isLoading } = useSWR(
-    `https://hacker-news.firebaseio.com/v0/item/${prop.id}.json?print=pretty`,
-    fetcher
-  );
   useEffect(() => {
-    if (!isLoading) {
-      let shortUrl = data.url;
-      if (data.url != undefined) {
-        shortUrl = host(data.url);
+    const fetchData = async () => {
+      const data = await getNew(prop.id);
+      setTopstorie(data);
+    };
+
+    fetchData().catch(console.error);
+  }, []);
+  useEffect(() => {
+    if (topstorie.shortUrl == undefined && topstorie.url) {
+      let shortUrl = topstorie.url;
+      if (topstorie.url != undefined) {
+        shortUrl = convertUrltoHost(topstorie.url);
       }
-      setTopstorie({ ...data, shortUrl: shortUrl });
+      setTopstorie({ ...topstorie, shortUrl: shortUrl });
+      setIsLoading(false);
     }
-  }, [isLoading]);
-  function host(url) {
-    const host = url
-      .replace(/^https?:\/\//, "")
-      .replace(/\/.*$/, "")
-      .replace("?id=", "/");
-    const parts = host.split(".").slice(-3);
-    if (parts[0] === "www") {
-      parts.shift();
-    }
-    return parts.join(".");
-  }
+  }, [topstorie]);
+
   return (
     isLoading === false && (
       <li className="grid grid-rows-2 grid-flow-col gap-1">

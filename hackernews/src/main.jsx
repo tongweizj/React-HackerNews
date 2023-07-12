@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import Home, { loader as homeLoader } from "./routers/home.jsx";
 import News, { loader as pageLoad } from "./routers/news.jsx";
 import ErrorPage from "./error-page.jsx";
+import "./style.css";
 
 const router = createBrowserRouter([
   {
