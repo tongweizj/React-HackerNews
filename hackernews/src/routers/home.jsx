@@ -5,16 +5,16 @@ import { getNews } from "../api/news.js";
 
 import Header from "../components/Header";
 import Main from "../components/Main";
-import ItemListNav from "../components/ItemListNav";
+import ListPagination from "../components/ListPagination.jsx";
 
 export async function loader() {
-  const newsIdList = await getNews(0);
-  return { newsIdList };
+  const { newsIdList, maxPage } = await getNews(1);
+  return { newsIdList, maxPage };
 }
 
 export default function Home() {
   const [newsIds, setNewsIds] = useState([]);
-  const { newsIdList } = useLoaderData();
+  const { newsIdList, maxPage } = useLoaderData();
 
   // 监测fetch是否结束，改变状态
   useEffect(() => {
@@ -26,8 +26,9 @@ export default function Home() {
   return (
     <>
       <Header />
-      <ItemListNav />
+
       <Main data={newsIds} />
+      <ListPagination maxPage={maxPage} page={1} />
     </>
   );
 }

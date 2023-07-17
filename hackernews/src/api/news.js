@@ -29,7 +29,7 @@ export async function getNews(id) {
     const temp = await fetchAllNews();
     newsIdList = temp;
   }
-  return newsIdList[id];
+  return { newsIdList: newsIdList[id - 1], maxPage: newsIdList.length };
 }
 
 export async function getNew(newId) {
