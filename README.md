@@ -10,7 +10,7 @@ HackerNews clone built with React.
  - [ ] build show page
  - [ ] build Jobs page
  - [ ] build Newest page
-
+ - [ ] refactory by next.js
 
 ## Build Setup
 
