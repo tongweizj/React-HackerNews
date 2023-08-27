@@ -27,20 +27,22 @@ export function ListItem(prop) {
 
   return (
     isLoading === false && (
-      <li className="grid grid-rows-2 grid-flow-col gap-1">
-        <span className="row-span-2"> {topstorie.score}</span>
-        <span className="col-span-11">
-          <span>
+      <div className="grid grid-rows-2 grid-flow-row-dense grid-cols-12 gap-1">
+        <div className="col-span-1 row-span-2 flex justify-center items-center">
+          <div className="text-gray-800"> {topstorie.score}</div>
+        </div>
+        <div className="col-span-11 row-span-1 mt-1">
+          <span className="text-sm text-gray-800">
             <a href={topstorie.url} target="_blank" rel="noopener noreferrer">
               {topstorie.title}
             </a>
-            <span className="text-zinc-400 text-sm">
+            <span className="text-zinc-400 text-xs">
               {" "}
               ({topstorie.shortUrl})
             </span>
           </span>
-        </span>
-        <span className="row-span-1 col-span-11 text-sm text-zinc-400">
+        </div>
+        <div className="row-span-1 col-span-11 text-xs text-zinc-400">
           {" "}
           <span className="by">
             {" "}
@@ -55,8 +57,15 @@ export function ListItem(prop) {
               {topstorie.descendants} comments
             </a>
           </span>
-        </span>
-      </li>
+        </div>
+      </div>
+      // <div className="flex flex-row">
+      //   <div className="basis-1/5">01</div>
+      //   <div className="basis-4/5">
+      //     02
+      //     <div className="">03</div>
+      //   </div>
+      // </div>
     )
   );
 }

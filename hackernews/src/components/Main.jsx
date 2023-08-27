@@ -15,8 +15,10 @@ export default function Main(prop) {
     }
   }, [prop]);
   return (
-    <main className="max-w-4xl mx-auto">
-      <ul className="max-w-4xl divide-y divide-slate-200">{topstoriesItems}</ul>
+    <main className="max-w-4xl mx-auto mt-6 bg-slate-50">
+      <div className="max-w-4xl divide-y divide-slate-200">
+        {topstoriesItems}
+      </div>
     </main>
   );
 }
